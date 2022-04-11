@@ -1,0 +1,16 @@
+#Tắt liệt kê nội dung thư mục
+Options All -Indexes
+
+# bật chế độ rewrite
+RewriteEngine On
+
+# điều kiện kiểm tra (-f) file có tồn tại hay k? (pass nếu không có trỏ đến file tồn tại)
+RewriteCond %{REQUEST_FILENAME}% !-f
+
+# điều kiện kiểm tra (-d) thư mục có tồn tại hay k? (pass nếu không có trỏ đến thư mục tồn tại)
+RewriteCond %{REQUEST_FILENAME}% !-d
+
+# Nếu không trỏ đến file tồn tại thì tự động add thêm index.php vô sau /public/ (k hiển thị lên url)
+RewriteRule ^ index.php [L,QSA]
+#[L] - Last rule: kí tự này để ấn định rằng bước trước đã xong thì ngừng và không tiếp tục thực thi lệnh rewrite tiếp theo nữa
+#[QSA] - Append Query String: chỉ định server gắn chuỗi truy vấn vào cuối cùng của URL
